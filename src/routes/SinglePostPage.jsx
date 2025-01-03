@@ -6,7 +6,6 @@ import Comments from "../Components/Comments"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { format } from "timeago.js"
-import ReactHtmlParser from 'react-html-parser';
 
 const fetchPost = async(slug) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/post/${slug}`)
