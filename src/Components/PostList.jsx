@@ -35,6 +35,7 @@ const PostList = () => {
     queryFn: ({pageParam = 1})=>fetchPost(pageParam,searchParams),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => lastPage.hasMore ? pages.length + 1 : undefined,
+    refetchOnWindowFocus: false, // Prevent refetching on tab focus
   })
 
   

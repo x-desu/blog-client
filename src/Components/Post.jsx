@@ -3,9 +3,9 @@ import Image from "./Image"
 import {format} from 'timeago.js'
 import Skeleton from 'react-loading-skeleton'
 
-const Post = ({post}) => {
+const Post = ({post,loading}) => {
   return (
-    <div className="flex flex-col xl:flex-row gap-8">
+    <div className={`flex flex-col xl:flex-row gap-8 ${loading?"opacity-0":'opacity-100'} transition-all`}>
         {/* image */}
          <Link to={`/${post.slug}`}  className="md:hidden xl:block xl:w-1/3 cursor-pointer">
             {post.img && <Image
