@@ -5,10 +5,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSearchParams } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
+import useTheme from "../context/ThemeContext";
 const PostList = () => {
 
   const [searchParams,setSearchParams] = useSearchParams()
-  
+  const{theme,toggleTheme} = useTheme()
   const fetchPost = async(pageParam,searchParams) => {
     const searchParamsObj = Object.fromEntries([...searchParams])
     try {
@@ -43,7 +44,7 @@ const PostList = () => {
   const loading = status === "loading" || isFetching;
   if(loading){
     return(
-      <SkeletonTheme baseColor="#202020" highlightColor="#444">
+      <SkeletonTheme baseColor={theme==='dark'?"#202020":"#ebebeb"} highlightColor={theme==='dark'?'#444':"#fbfbfb"}>
       <div className="flex xl:flex-row flex-col  gap-4">
       {<Skeleton  className=" rounded-2xl md:hidden h-60 sm:h-96 md:h-40 xl-40 2xl:h-60" containerClassName="rounded-2xl xl:block xl:w-1/3 md:hidden" enableAnimation={true}/>||<h1>loading...</h1>}
       <div className="flex flex-col xl:w-2/3 gap-4">
