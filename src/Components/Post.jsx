@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import Image from "./Image"
 import {format} from 'timeago.js'
+import Skeleton from 'react-loading-skeleton'
 
 const Post = ({post}) => {
   return (

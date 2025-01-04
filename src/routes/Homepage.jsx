@@ -9,13 +9,18 @@ const Homepage = () => {
       <div className="flex gap-4">
         <Link to='/'>Home</Link>
         <span>.</span>
-        <span className="text-blue-50 dark:text-blue-400">Blogs and Articles</span>
+        <span className="text-blue-800 dark:text-blue-400">Blogs and Articles</span>
       </div>
       <div className="flex items-center justify-between">
         <div>
         <h1 className="dark:text-stone-300 text-black text-2xl md:text-5xl lg:text-6xl font-bold">Write and publish blogs/articles.</h1>
+        <div className="flex gap-4 items-center content-center ">
         <p className="mt-8 text-md md:text-lg">
         Share your thoughts, ideas, and knowledge with the world. Create impactful articles that engage and inspire readers.</p>
+        <div className="bg-blue-800 text-white p-2.5  rounded-2xl md:hidden active:scale-110 transition-all">
+        <Link className="text-base  " to='/write'>Write</Link>
+        </div>
+        </div>
         </div>
         <Link className="relative hidden md:block" to='/write'>
         <svg

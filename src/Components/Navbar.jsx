@@ -53,11 +53,11 @@ const Navbar = () => {
             text-2xl font-bold shadow-lg shadow-black
             transition-[right, opacity] duration-300 ease-in-out 
             ${open?"right-0 opacity-100":"-right-[100%] opacity-50"}`}>
-            <Link className="" to="/">Home</Link>
-            <Link to="/posts?sort=trending">Trending</Link>
-            <Link to="/posts?sort=most-popular">Most Popular</Link>
-            <Link to="/about">About</Link>
-            <Link to="/">
+            <Link onClick={()=>setOpen(prev=>!prev)} className="" to="/">Home</Link>
+            <Link onClick={()=>setOpen(prev=>!prev)} to="/posts?sort=trending">Trending</Link>
+            <Link onClick={()=>setOpen(prev=>!prev)} to="/posts?sort=most-popular">Most Popular</Link>
+            <Link onClick={()=>setOpen(prev=>!prev)} to="/about">About</Link>
+            <Link onClick={()=>setOpen(prev=>!prev)} to="/login">
             <button  className="py-2.5 px-6 rounded-3xl bg-blue-800 shadow-lg shadow-blue-800/50 text-white">Login <span className=" cursor-pointer" >👋</span></button>
             </Link>
             <SunMoonToggle/>

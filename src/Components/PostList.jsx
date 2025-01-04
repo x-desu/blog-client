@@ -3,11 +3,12 @@ import Post from "./Post"
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSearchParams } from "react-router-dom";
-
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 const PostList = () => {
 
   const [searchParams,setSearchParams] = useSearchParams()
-  console.log(searchParams.toString())
+  
   const fetchPost = async(pageParam,searchParams) => {
     const searchParamsObj = Object.fromEntries([...searchParams])
     try {
@@ -35,11 +36,26 @@ const PostList = () => {
     getNextPageParam: (lastPage, pages) => lastPage.hasMore ? pages.length + 1 : undefined,
   })
 
-  if(status === "loading") return "Loading...";
+  
   if(status === "error") return "Something went wrong!";  
 
   const allPosts = data?.pages?.flatMap(page=>page.posts) || []
-  
+  const loading = status === "loading" || isFetching;
+  if(loading){
+    return(
+      <SkeletonTheme baseColor="#202020" highlightColor="#444">
+      <div className="flex xl:flex-row flex-col  gap-4">
+      {<Skeleton  className=" rounded-2xl md:hidden h-60 sm:h-96 md:h-40 xl-40 2xl:h-60" containerClassName="rounded-2xl xl:block xl:w-1/3 md:hidden" enableAnimation={true}/>||<h1>loading...</h1>}
+      <div className="flex flex-col xl:w-2/3 gap-4">
+      {<Skeleton count={2} className="animate-pulse " containerClassName="md:text-3xl text-3xl " enableAnimation={true}/>||<h1>loading...</h1>}
+      {<Skeleton count={1} className="animate-pulse " containerClassName="w-1/3" enableAnimation={true}/>||<h1>loading...</h1>}
+      {<Skeleton count={3} className="animate-pulse" enableAnimation={true}/>||<h1>loading...</h1>}
+      {<Skeleton count={1} className="animate-pulse" containerClassName="w-1/5" enableAnimation={true}/>||<h1>loading...</h1>}
+      </div>
+      </div>
+      </SkeletonTheme>
+    )
+  }
   return (
     <InfiniteScroll
     className="flex flex-col gap-12 mb-8"
@@ -55,6 +71,7 @@ const PostList = () => {
     {allPosts.map(post=>(
         <Post key={post._id}
           post={post}
+          loading={loading}
         />
       ))}
   </InfiniteScroll>
